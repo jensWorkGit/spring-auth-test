@@ -7,10 +7,10 @@ package com.waruna.authtest.dao;
 public class User {
 
     Integer user_id;
-    String fb_id;
-    String fb_auth_token;
-    String username;
-    String password;
+    String  fb_id;
+    String  fb_auth_token;
+    String  username;
+    String  password;
 
     public User() {
     }

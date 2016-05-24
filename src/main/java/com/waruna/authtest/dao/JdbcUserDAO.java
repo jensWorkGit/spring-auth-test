@@ -34,10 +34,9 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
     @Override
     public User getUserByFacebookID(String fbId) {
 
-        String sql = "SELECT * from user WHERE fb_id="+fbId;
+        String sql = "SELECT * from user WHERE fb_id=" + fbId;
 
-        User user = jdbcTemplate.queryForObject(sql, new Object[]{fbId},
-                new RowMapper<User>() {
+        User user = jdbcTemplate.queryForObject(sql, new Object[]{fbId}, new RowMapper<User>() {
                     @Override
                     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
                         User user = new User();
@@ -56,7 +55,8 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
     @Override
     public boolean createNewUser(String fbId, String authToken, String username) {
 
-        String sql = "INSERT INTO user (fb_id, fb_auth_token, username, password) VALUES ("+fbId+","+authToken+","+username+","+authToken+")";
+        String sql = "INSERT INTO user (fb_id, fb_auth_token, username, password) VALUES (" + fbId + "," + authToken +
+                     "," + username + "," + authToken + ")";
 
         int updated = jdbcTemplate.update(sql);
         if (updated > 1)
@@ -66,38 +66,37 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
     }
 
     //    @Override
-//    public User getUserById(int id) {
-//
-//        String sql = "SELECT * FROM user WHERE user_id="+id;
-//
-//        User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
-//                new RowMapper<User>() {
-//
-//                    @Override
-//                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-//                        User user = new User();
-//                        user.setName(rs.getString("username"));
-//                        user.setFb_auth_token(rs.getString("fb_auth_token"));
-//                        user.setFb_id(rs.getString("fb_id"));
-//                        user.setUser_id(rs.getInt("user_id"));
-//
-//                        return user;
-//                    }
-//                });
-//
-//        return user;
-//
-//
-//    }
+    //    public User getUserById(int id) {
+    //
+    //        String sql = "SELECT * FROM user WHERE user_id="+id;
+    //
+    //        User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
+    //                new RowMapper<User>() {
+    //
+    //                    @Override
+    //                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+    //                        User user = new User();
+    //                        user.setName(rs.getString("username"));
+    //                        user.setFb_auth_token(rs.getString("fb_auth_token"));
+    //                        user.setFb_id(rs.getString("fb_id"));
+    //                        user.setUser_id(rs.getInt("user_id"));
+    //
+    //                        return user;
+    //                    }
+    //                });
+    //
+    //        return user;
+    //
+    //
+    //    }
 
     @Override
     public User getUserByUserName(String username) {
 
 
-        String sql = "SELECT * FROM user WHERE username='"+username+"'";
+        String sql = "SELECT * FROM user WHERE username='" + username + "'";
 
-        User user = jdbcTemplate.queryForObject(sql, null,
-                new RowMapper<User>() {
+        User user = jdbcTemplate.queryForObject(sql, null, new RowMapper<User>() {
                     @Override
                     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
                         User user = new User();
@@ -118,10 +117,10 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        System.out.println("usernamr ------"+username);
+        System.out.println("usernamr ------" + username);
 
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
-        UserDAO userDAO =  (UserDAO) context.getBean("userDAO");
+        UserDAO userDAO = (UserDAO) context.getBean("userDAO");
 
         User user = userDAO.getUserByUserName(username);
         if (user == null) {
@@ -130,7 +129,7 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
         return new UserRepositoryUserDetails(user);
     }
 
-        private final static class UserRepositoryUserDetails extends User implements UserDetails {
+    private final static class UserRepositoryUserDetails extends User implements UserDetails {
 
         private static final long serialVersionUID = 1L;
 
@@ -138,17 +137,17 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
             super(user);
         }
 
-            @Override
-            public String getPassword() {
-                System.out.println("-------- get password gets called --------");
+        @Override
+        public String getPassword() {
+            System.out.println("-------- get password gets called --------");
 
-                return password;
-            }
+            return password;
+        }
 
-            @Override
+        @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
-                System.out.println("-------- grant authority gets called --------");
-                return null;
+            System.out.println("-------- grant authority gets called --------");
+            return null;
         }
 
         @Override

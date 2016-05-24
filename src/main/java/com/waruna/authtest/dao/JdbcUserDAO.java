@@ -37,17 +37,17 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
         String sql = "SELECT * from user WHERE fb_id=" + fbId;
 
         User user = jdbcTemplate.queryForObject(sql, new Object[]{fbId}, new RowMapper<User>() {
-                    @Override
-                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        User user = new User();
-                        user.setUsername(rs.getString("username"));
-                        user.setFb_id(rs.getString("fb_id"));
-                        user.setFb_auth_token(rs.getString("fb_auth_token"));
-                        user.setUser_id(rs.getInt("user_id"));
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setFb_id(rs.getString("fb_id"));
+                user.setFb_auth_token(rs.getString("fb_auth_token"));
+                user.setUser_id(rs.getInt("user_id"));
 
-                        return user;
-                    }
-                });
+                return user;
+            }
+        });
 
         return user;
     }
@@ -65,31 +65,6 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
         return false;
     }
 
-    //    @Override
-    //    public User getUserById(int id) {
-    //
-    //        String sql = "SELECT * FROM user WHERE user_id="+id;
-    //
-    //        User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
-    //                new RowMapper<User>() {
-    //
-    //                    @Override
-    //                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-    //                        User user = new User();
-    //                        user.setName(rs.getString("username"));
-    //                        user.setFb_auth_token(rs.getString("fb_auth_token"));
-    //                        user.setFb_id(rs.getString("fb_id"));
-    //                        user.setUser_id(rs.getInt("user_id"));
-    //
-    //                        return user;
-    //                    }
-    //                });
-    //
-    //        return user;
-    //
-    //
-    //    }
-
     @Override
     public User getUserByUserName(String username) {
 
@@ -97,18 +72,18 @@ public class JdbcUserDAO implements UserDAO, UserDetailsService {
         String sql = "SELECT * FROM user WHERE username='" + username + "'";
 
         User user = jdbcTemplate.queryForObject(sql, null, new RowMapper<User>() {
-                    @Override
-                    public User mapRow(ResultSet rs, int rowNum) throws SQLException {
-                        User user = new User();
-                        user.setUsername(rs.getString("username"));
-                        user.setFb_auth_token(rs.getString("fb_auth_token"));
-                        user.setFb_id(rs.getString("fb_id"));
-                        user.setUser_id(rs.getInt("user_id"));
-                        user.setPassword(rs.getString("password"));
+            @Override
+            public User mapRow(ResultSet rs, int rowNum) throws SQLException {
+                User user = new User();
+                user.setUsername(rs.getString("username"));
+                user.setFb_auth_token(rs.getString("fb_auth_token"));
+                user.setFb_id(rs.getString("fb_id"));
+                user.setUser_id(rs.getInt("user_id"));
+                user.setPassword(rs.getString("password"));
 
-                        return user;
-                    }
-                });
+                return user;
+            }
+        });
 
         return user;
 

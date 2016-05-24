@@ -69,19 +69,10 @@ public class OAuth2ServerConfiguration  {
             AuthorizationServerConfigurerAdapter {
 
         @Autowired
-        private DataSource dataSource;// = DataSourceBuilder.create()
-//                .driverClassName("com.mysql.jdbc.Driver")
-//                .url("jdbc:mysql://127.0.0.1:8889/curve").username("curve").password("curve").build();
+        private DataSource dataSource;
 
-        private TokenStore tokenStore;// = new JdbcTokenStore(dataSource);
+        private TokenStore tokenStore;
 
-//        @Autowired
-//        public void setDataSource(DataSource dataSource) {
-//            this.dataSource = dataSource;
-//        }
-
-        //@Autowired
-        //@Qualifier("authenticationManagerBean")
         @Inject
         private AuthenticationManager authenticationManager;
 

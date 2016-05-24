@@ -21,6 +21,16 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/Spring-DataSource.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/Spring-Module.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/Spring-AuthorizationServerConfiguration.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/Spring-User.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/build/classes/main" />
